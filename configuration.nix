@@ -40,6 +40,11 @@
   # 需要显示启用containerd
   virtualisation.containerd.enable = true;
   virtualisation.docker.enable = true;
+  # 启用v2raya服务
+  services.v2raya.enable = true;
+  systemd.services.v2raya.serviceConfig.Environment = [
+    "V2RAYA_ADDRESS=0.0.0.0:8888"
+  ];
   # 2. 启用 Oh My Zsh (OMZ) 模块
   programs.zsh = {
     enable = true;
