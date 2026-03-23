@@ -7,10 +7,15 @@
 
 { config, lib, pkgs, ... }:
 
+# 启用home-manager模块
+let
+  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-25.11.tar.gz;
+in
 {
   imports = [
     # include NixOS-WSL modules
     <nixos-wsl/modules>
+    (import "${home-manager}/nixos")
   ];
 
   environment.systemPackages = with pkgs; [
@@ -45,6 +50,16 @@
   systemd.services.v2raya.serviceConfig.Environment = [
     "V2RAYA_ADDRESS=0.0.0.0:8888"
   ];
+  # home-manager配置
+  users.users.nixos.isNormalUser = true;
+  home-manager.users.nixos = { pkgs, ... }: {
+    home.packages = [ pkgs.atool pkgs.httpie ];
+    programs.bash.enable = true;
+
+    # The state version is required and should stay at the version you
+    # originally installed.
+    home.stateVersion = "25.11";
+  };
   # 2. 启用 Oh My Zsh (OMZ) 模块
   programs.zsh = {
     enable = true;
