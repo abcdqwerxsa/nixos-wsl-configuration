@@ -41,6 +41,7 @@ in
     nodejs_22
     go
     docker-compose
+    nvim-treesitter.withAllGrammars
   ];
   # 需要显示启用containerd
   virtualisation.containerd.enable = true;
