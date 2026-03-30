@@ -90,7 +90,7 @@ in
     # Oh My Zsh 配置块 (保持不变)
     ohMyZsh = {
       enable = true;
-      theme = "agnoster";
+      theme = "robbyrussell";
 
       # 仅保留 Oh My Zsh 官方自带的插件
       plugins = [
