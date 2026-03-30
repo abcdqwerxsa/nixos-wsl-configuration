@@ -45,6 +45,18 @@ in
   # 需要显示启用containerd
   virtualisation.containerd.enable = true;
   virtualisation.docker.enable = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # 这里添加 treesitter 编译时可能需要的常用库
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  ];
   # 启用v2raya服务
   services.v2raya.enable = true;
   systemd.services.v2raya.serviceConfig.Environment = [
